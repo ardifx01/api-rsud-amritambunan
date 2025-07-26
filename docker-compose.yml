@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  rsud-amri-tambunan:
+    container_name: rsud-amri-tambunan
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+      - ./uploads:/app/uploads
+    depends_on:
+      - mysql-fanscosa
+    restart: always
+
+  mysql-fanscosa:
+    image: mysql:8.0
+    container_name: mysql-fanscosa
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: @Arb1berjayalah
+      MYSQL_DATABASE: rsud_amri_tambunan_db
+      MYSQL_USER: fanscosa_user
+      MYSQL_PASSWORD: @Arb1berjayalah
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:

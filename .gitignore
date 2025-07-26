@@ -4,11 +4,11 @@
 .env.production
 
 # Docker Compose (deployment specific)
-docker-compose.yml
-docker-compose.*.yml
+# docker-compose.yml
+# docker-compose.*.yml
 
 # Deployment scripts
-deploy.sh
+# deploy.sh
 
 # Logs
 logs/
