@@ -1,0 +1,24 @@
+# Environment
+.env
+.env.local
+.env.production
+
+# Docker Compose (deployment specific)
+docker-compose.yml
+docker-compose.*.yml
+
+# Deployment scripts
+deploy.sh
+
+# Logs
+logs/
+*.log
+
+# Uploads
+uploads/
+
+# Dependencies
+node_modules/".env" 
+.env
+.env
+.env
