@@ -97,7 +97,7 @@ docker-compose ps
 
 # Check logs
 print_status "Checking application logs..."
-docker-compose logs fans-cosa-api --tail=20
+docker-compose logs rsud-amri-tambunan --tail=20
 
 # Test API endpoint
 print_status "Testing API endpoint..."
@@ -117,7 +117,7 @@ print_status "Local access: http://localhost:5001"
 
 echo ""
 echo "📋 Useful commands:"
-echo "  View logs: docker-compose logs -f fans-cosa-api"
-echo "  Restart: docker-compose restart fans-cosa-api"
+echo "  View logs: docker-compose logs -f rsud-amri-tambunan"
+echo "  Restart: docker-compose restart rsud-amri-tambunan"
 echo "  Stop: docker-compose down"
 echo "  Update: ./deploy.sh"
