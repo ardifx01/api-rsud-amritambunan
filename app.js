@@ -34,7 +34,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware CORS
 const allowedOrigins = [
     process.env.FRONTEND_URL,
-    'http://localhost:3015',
+    'http://localhost:3002',
     'http://localhost:5001',
     'https://rsud-amritambunan.fanscosa.co.id',
     'https://api-rsud-amritambunan.fanscosa.co.id'

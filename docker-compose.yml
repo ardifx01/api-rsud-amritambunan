@@ -1,34 +1,42 @@
-version: "3.8"
-
 services:
   rsud-amri-tambunan:
+    build: .
     container_name: rsud-amri-tambunan
-    build:
-      context: .
-      dockerfile: Dockerfile
     ports:
       - "5001:5001"
+    environment:
+      - NODE_ENV=production
     env_file:
       - .env
+    networks:
+      - rsud-network
     volumes:
       - ./logs:/app/logs
       - ./uploads:/app/uploads
-    depends_on:
-      - mysql-fanscosa
-    restart: always
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "healthcheck.js"]
+      interval: 30s
+      timeout: 10s
+      start_period: 40s
+      retries: 3
 
-  mysql-fanscosa:
+  mysql:
     image: mysql:8.0
-    container_name: mysql-fanscosa
-    ports:
-      - "3306:3306"
+    container_name: mysql-rsud-amri-tambunan
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: @Arb1berjayalah
-      MYSQL_DATABASE: rsud_amri_tambunan_db
-      MYSQL_USER: fanscosa_user
-      MYSQL_PASSWORD: @Arb1berjayalah
+      MYSQL_ROOT_PASSWORD: "@Arb1berjayalah"
     volumes:
-      - mysql-data:/var/lib/mysql
+      - rsud_amri_tambunan_api_mysql_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - rsud-network
 
 volumes:
-  mysql-data:
+  rsud_amri_tambunan_api_mysql_data:
+
+networks:
+  rsud-network:
+    external: true
