@@ -108,7 +108,7 @@ if curl -f http://localhost:5001/health > /dev/null 2>&1; then
     curl -s http://localhost:5001/ | head -3
 else
     print_warning "⚠️  API health check failed. Check the logs for more details."
-    docker-compose logs fans-cosa-api --tail=50
+    docker-compose logs cosa-amri-tambunan-api --tail=50
 fi
 
 print_status "🎉 Deployment completed!"

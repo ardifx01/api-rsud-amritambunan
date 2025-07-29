@@ -1,2 +1,2 @@
-# fans-cosa-api
+# cosa-amri-tambunan
 Glucose Controll Application

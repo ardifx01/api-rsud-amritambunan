@@ -19,6 +19,7 @@ uploads/
 
 # Dependencies
 node_modules/".env" 
+node_modules
 .env
 .env
 .env
