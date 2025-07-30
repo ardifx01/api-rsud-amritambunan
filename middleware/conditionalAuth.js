@@ -1,10 +1,5 @@
-const express = require('express');
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const MappingPatientsController = require('../controllers/mappingPatientController');
-const testGlucosaBridgingControllers = require('../controllers/testGlucosaBridgingControllers');
-const authorize = require('../middleware/rbac');
-
-const router = express.Router();
 
 const staticUser = {
   id: 11,
@@ -20,7 +15,6 @@ const staticUser = {
   ]
 };
 
-// Conditional authentication middleware
 const conditionalAuthenticate = async (req, res, next) => {
   const authHeader = req.headers['authorization'] || req.headers['Authorization'];
 
@@ -37,6 +31,9 @@ const conditionalAuthenticate = async (req, res, next) => {
   if (authHeader.startsWith('Bearer ')) {
     token = authHeader.substring(7);
   }
+
+  console.log('Extracted token:', token.substring(0, 20) + '...');
+  console.log('Expected static token:', process.env.STATIC_BRIDGING_TOKEN ? process.env.STATIC_BRIDGING_TOKEN.substring(0, 20) + '...' : 'NOT_SET');
 
   // Check if it's static bridging token
   if (token === process.env.STATIC_BRIDGING_TOKEN) {
@@ -62,14 +59,4 @@ const conditionalAuthenticate = async (req, res, next) => {
   }
 };
 
-// Gunakan conditional authentication middleware
-router.use(conditionalAuthenticate);
-
-// Routes dengan middleware otorisasi
-router.post('/', authorize('create_mapping_patient'), MappingPatientsController.createMappingPatient);
-router.get('/', authorize('view_bridging_glucose_test'), testGlucosaBridgingControllers.getAllTestBridgingPatients);
-// router.get('/:id', authorize('view_bridging_glucose_test'), testGlucosaBridgingControllers.getTestBridgingPatientById);
-// router.get('/', authorize('view_mapping_patient'), MappingPatientsController.getAllPatients);
-
-
-module.exports = router;
+module.exports = conditionalAuthenticate;
