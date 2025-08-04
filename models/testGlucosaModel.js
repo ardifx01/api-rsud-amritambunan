@@ -277,64 +277,6 @@ const TestGlucosaModel = {
         }
     },
 
-    // static async getByPatientId(patientId, limit = 10, offset = 0) {
-    //     // Cek apakah patient ada
-    //     const [patientCheck] = await db.query('SELECT id FROM patients WHERE id = ?', [patientId]);
-
-    //     if (patientCheck.length === 0) {
-    //         throw new Error('Patient not found');
-    //     }
-
-    //     // Hitung total tes gula darah untuk pasien ini
-    //     const [totalCountResult] = await db.query(
-    //         'SELECT COUNT(*) as total FROM glucosa_tests WHERE patient_id = ?',
-    //         [patientId]
-    //     );
-    //     const totalCount = totalCountResult[0].total;
-
-    //     // Ambil data tes gula darah
-    //     const [rows] = await db.query(
-    //         'SELECT * FROM glucosa_tests WHERE patient_id = ? ORDER BY date_time DESC LIMIT ? OFFSET ?',
-    //         [patientId, limit, offset]
-    //     );
-
-    //     // Hitung informasi pagination
-    //     const totalPages = Math.ceil(totalCount / limit);
-    //     const currentPage = Math.floor(offset / limit) + 1;
-
-    //     return {
-    //         data: rows,
-    //         pagination: {
-    //             total_records: totalCount,
-    //             total_pages: totalPages,
-    //             current_page: currentPage,
-    //             per_page: limit,
-    //             next_page: currentPage < totalPages ? currentPage + 1 : null,
-    //             prev_page: currentPage > 1 ? currentPage - 1 : null
-    //         }
-    //     };
-    // }
-
-    // static async getByPatientIdAll(patientId) {
-    //     // Cek apakah patient ada
-    //     const [patientCheck] = await db.query('SELECT id FROM patients WHERE id = ?', [patientId]);
-
-    //     if (patientCheck.length === 0) {
-    //         throw new Error('Patient not found');
-    //     }
-
-    //     // Ambil semua data tes gula darah untuk pasien ini
-    //     const [rows] = await db.query(
-    //         'SELECT * FROM glucosa_tests WHERE patient_id = ? ORDER BY date_time DESC',
-    //         [patientId]
-    //     );
-
-    //     return rows; // Kembalikan data tes gula darah
-    // }
-
-
-    //get all tests per patient no pagination
-
     getByPatientIdAll: async (patientId, { lab_number = null } = {}) => {
         // Cek apakah patient ada
         const [patientCheck] = await db.query('SELECT id FROM patients WHERE id = ?', [patientId]);

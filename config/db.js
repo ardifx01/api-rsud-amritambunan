@@ -1,6 +1,5 @@
 require('dotenv').config();
 const mysql = require('mysql2');
-
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -11,8 +10,4 @@ const pool = mysql.createPool({
     queueLimit: 0,
     timezone: '+07:00'
 });
-
-
-
-
 module.exports = pool.promise(); // Pastikan ini benar!

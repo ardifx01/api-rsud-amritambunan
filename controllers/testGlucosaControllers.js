@@ -248,35 +248,7 @@ module.exports = {
             });
         }
     },
-    // getPatientTestNoPagination: async (req, res) => {
-    //     try {
-    //         const { patient_id } = req.params;
-
-    //         try {
-    //             const data = await TestGlucosaModel.getByPatientIdAll(patient_id);
-
-    //             res.status(200).send({
-    //                 status: 'success',
-    //                 message: 'Glucose tests retrieved successfully',
-    //                 data // Langsung kirimkan semua data
-    //             });
-    //         } catch (modelError) {
-    //             // Tangani error spesifik dari model
-    //             return res.status(404).send({
-    //                 status: 'error',
-    //                 message: modelError.message,
-    //                 data: null
-    //             });
-    //         }
-    //     } catch (error) {
-    //         res.status(500).send({
-    //             status: 'error',
-    //             message: 'Failed to retrieve glucose tests',
-    //             data: { error: error.message }
-    //         });
-    //     }
-    // },
-
+    
     // Update tes gula darah
     updateTest: async (req, res) => {
         try {
@@ -435,57 +407,6 @@ module.exports = {
             }
         }
     },
-    // updateValidation: async (req, res) => {
-    //     try {
-    //         const { id } = req.params;
-    //         const userName = req.user.name; // Mengambil name dari req.user yang diisi oleh middleware
-
-    //         // Validasi jika ID tidak valid
-    //         if (!id || isNaN(id)) {
-    //             return res.status(400).json({ message: 'ID tidak valid' });
-    //         }
-
-    //         // Ambil data yang akan dipindahkan
-    //         const testData = await TestGlucosaModel.getTestDataById(id);
-    //         if (!testData) {
-    //             return res.status(404).json({ message: 'Data not found' });
-    //         }
-
-    //         // Update status validasi dengan menyertakan userName
-    //         const isUpdated = await TestGlucosaModel.IsValidationTest(id, userName);
-    //         if (!isUpdated) {
-    //             return res.status(500).json({ message: 'Failed to update validation status' });
-    //         }
-
-    //         // Insert data ke tabel glucosa_test dalam database cosa_app_bridging_db
-    //         const newData = {
-    //             id: testData.id,
-    //             date_time: testData.date_time,
-    //             patient_code: testData.patient_code,
-    //             lab_number: testData.lab_number,
-    //             glucos_value: testData.glucos_value,
-    //             unit: testData.unit,
-    //             patient_id: testData.patient_id,
-    //             device_name: testData.device_name,
-    //             metode: testData.metode,
-    //             is_validation: 1, // Menandai bahwa data ini sudah divalidasi
-    //         };
-
-    //         const insertResult = await TestGlucosaBridgingModel.insertGlucosaTest(newData);
-    //         if (!insertResult) {
-    //             return res.status(500).json({ message: 'Failed to insert data into bridging database' });
-    //         }
-
-    //         // Kembalikan respons yang menyertakan informasi user
-    //         return res.status(200).json({
-    //             message: 'Validation and data migration successful',
-    //             user_validation: userName // Mengirimkan kembali informasi user untuk digunakan di frontend
-    //         });
-    //     } catch (error) {
-    //         console.error('Error updating validation:', error);
-    //         return res.status(500).json({ message: 'An error occurred on the server' });
-    //     }
-    // },
 
     // Data untuk tampilans dashboard
     totalResultIsValidationDone: async (req, res) => {

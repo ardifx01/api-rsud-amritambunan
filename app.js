@@ -66,14 +66,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(logActivity);
 
-// Rate Limiting
-// const limiter = rateLimit({
-//     windowMs: 15 * 60 * 1000,
-//     max: 100,
-//     message: 'Too many requests from this IP, please try again later.'
-// });
-// app.use(limiter);
-
 // Test database connection
 (async () => {
   try {

@@ -163,7 +163,7 @@ const TestGlucosaBridgingModel = {
     insertGlucosaTest: async (data) => {
         try {
             const query = `
-            INSERT INTO fans_cosa_api_db.glucosa_test_bridgings
+            INSERT INTO rsud_amri_tambunan_db.glucosa_test_bridgings
             (id, patient_code, lab_number, date_time, glucos_value, unit, patient_id, device_name, metode, is_validation)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
