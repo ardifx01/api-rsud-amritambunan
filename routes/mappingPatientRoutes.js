@@ -11,5 +11,7 @@ router.use(conditionalAuthenticate);
 // Routes dengan middleware otorisasi
 router.post('/', authorize('create_mapping_patient'), MappingPatientsController.createMappingPatient);
 router.get('/', authorize('view_mapping_patient'), MappingPatientsController.getAllPatients);
+router.get('/:id', authorize('view_mapping_patient'), MappingPatientsController.getPatientById);
+
 
 module.exports = router;

@@ -36,6 +36,8 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:3002",
   "http://localhost:5001",
+  "http://192.168.18.81:3002",
+  "http://192.168.18.81:5001",
   "https://rsud-amritambunan.fanscosa.co.id",
   "https://api-rsud-amritambunan.fanscosa.co.id",
 ];
@@ -143,8 +145,15 @@ process.on("SIGINT", () => {
 });
 
 // Start server
-app.listen(PORT, "127.0.0.1", () => {
-  console.log(`🚀 Server berjalan di http://127.0.0.1:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server berjalan di http://192.168.18.81:${PORT}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
-  console.log(`📊 Health check: http://127.0.0.1:${PORT}/health`);
+  console.log(`📊 Health check: http://192.168.18.81:${PORT}/health`);
+});
+
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server berjalan di http://0.0.0.0:${PORT}`);
+  console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(`📊 Health check: http://0.0.0.0:${PORT}/health`);
 });
