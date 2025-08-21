@@ -19,6 +19,7 @@ const connectionStatusRoutes = require("./routes/connectionStatusRoutes");
 const settingRoutes = require("./routes/settingRoutes");
 const staticTokenRoutes = require("./routes/staticTokenRoutes");
 const activityLogRoutes = require("./routes/activityLogRoutes");
+const roomRoutes = require("./routes/roomRoutes"); // Import room routes
 
 // Import health check route
 const healthRoutes = require("./routes/healthRoutes");
@@ -94,6 +95,8 @@ app.use("/api/connection-status", connectionStatusRoutes);
 app.use("/api/setting", settingRoutes);
 app.use("/api/static-token", staticTokenRoutes);
 app.use("/api/activity-log", activityLogRoutes);
+app.use('/api/rooms', roomRoutes); 
+
 
 //Routes Bridgings
 app.use("/v1/bridging/glucose-test", testGlucosaBridgingRoutes);
@@ -145,13 +148,6 @@ process.on("SIGINT", () => {
 });
 
 // Start server
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server berjalan di http://192.168.18.81:${PORT}`);
-  console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
-  console.log(`📊 Health check: http://192.168.18.81:${PORT}/health`);
-});
-
-
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server berjalan di http://0.0.0.0:${PORT}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
