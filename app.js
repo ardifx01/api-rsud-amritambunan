@@ -20,6 +20,7 @@ const settingRoutes = require("./routes/settingRoutes");
 const staticTokenRoutes = require("./routes/staticTokenRoutes");
 const activityLogRoutes = require("./routes/activityLogRoutes");
 const roomRoutes = require("./routes/roomRoutes"); // Import room routes
+const availableRoomsRoutes = require("./routes/availableRoomRoutes");
 
 // Import health check route
 const healthRoutes = require("./routes/healthRoutes");
@@ -96,6 +97,7 @@ app.use("/api/setting", settingRoutes);
 app.use("/api/static-token", staticTokenRoutes);
 app.use("/api/activity-log", activityLogRoutes);
 app.use('/api/rooms', roomRoutes); 
+app.use('/api/available-rooms', availableRoomsRoutes);
 
 
 //Routes Bridgings

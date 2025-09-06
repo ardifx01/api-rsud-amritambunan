@@ -287,7 +287,8 @@ const MappingPatient = {
     start_date = null,
     end_date = null,
     single_date = null,
-    is_order = null // Tambahkan parameter is_order
+    is_order = null,
+    room = null // Tambahkan parameter room
   ) => {
     let query = `
       SELECT 
@@ -336,6 +337,12 @@ const MappingPatient = {
       params.push(parseInt(is_order, 10));
     }
 
+    // Tambahkan filter untuk room
+    if (room !== null && room !== undefined && room !== "") {
+      query += ` AND room = ? `;
+      params.push(room);
+    }
+
     if (start_date && end_date) {
       query += ` AND DATE(created_at) BETWEEN ? AND ? `;
       params.push(start_date, end_date);
@@ -351,13 +358,14 @@ const MappingPatient = {
     return rows;
   },
 
-// Anda juga perlu mengupdate method getTotalCount untuk menangani filter is_order:
-getTotalCount: async (
+  // Anda juga perlu mengupdate method getTotalCount untuk menangani filter is_order:
+  getTotalCount: async (
     search = "",
     start_date = null,
     end_date = null,
     single_date = null,
-    is_order = null
+    is_order = null,
+    room = null // Tambahkan parameter room
   ) => {
     let query = `
       SELECT COUNT(*) as total
@@ -387,6 +395,12 @@ getTotalCount: async (
       params.push(parseInt(is_order, 10));
     }
 
+    // Tambahkan filter untuk room
+    if (room !== null && room !== undefined && room !== "") {
+      query += ` AND room = ? `;
+      params.push(room);
+    }
+
     if (start_date && end_date) {
       query += ` AND DATE(created_at) BETWEEN ? AND ? `;
       params.push(start_date, end_date);
@@ -406,6 +420,17 @@ getTotalCount: async (
       [id]
     );
     return rows[0] || null;
+  },
+
+  getAvailableRooms: async () => {
+    const [rows] = await db.query(
+      `SELECT DISTINCT room 
+       FROM mapping_patients 
+       WHERE room IS NOT NULL 
+       AND room != '' 
+       ORDER BY room ASC`
+    );
+    return rows.map(row => row.room);
   },
 
   totalPatientsPerMonth: async () => {

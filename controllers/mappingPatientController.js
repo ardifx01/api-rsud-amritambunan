@@ -99,7 +99,8 @@ const MappingPatientsController = {
       start_date,
       end_date,
       date,
-      is_order, // Tambahkan parameter is_order
+      is_order, // Parameter is_order
+      room, // Tambahkan parameter room
     } = req.query;
 
     const pageNumber = parseInt(page, 10) || 1;
@@ -130,7 +131,8 @@ const MappingPatientsController = {
         formattedStart,
         formattedEnd,
         formattedDate,
-        is_order // Pass is_order parameter ke model
+        is_order, // Pass is_order parameter ke model
+        room // Pass room parameter ke model
       );
 
       const totalPatients = await MappingPatient.getTotalCount(
@@ -138,8 +140,10 @@ const MappingPatientsController = {
         formattedStart,
         formattedEnd,
         formattedDate,
-        is_order // Pass is_order parameter ke getTotalCount juga
+        is_order, // Pass is_order parameter ke getTotalCount
+        room // Pass room parameter ke getTotalCount
       );
+
       const totalPages = Math.ceil(totalPatients / limitNumber);
 
       res.status(200).send({
@@ -159,6 +163,26 @@ const MappingPatientsController = {
       res.status(500).send({
         status: "error",
         message: "Failed to retrieve patients",
+        data: { error: error.message },
+      });
+    }
+  },
+
+  getAvailableRooms: async (req, res) => {
+    try {
+      const rooms = await MappingPatient.getAvailableRooms();
+      
+      res.status(200).send({
+        status: "success",
+        message: "Available rooms retrieved successfully",
+        data: {
+          rooms,
+        },
+      });
+    } catch (error) {
+      res.status(500).send({
+        status: "error",
+        message: "Failed to retrieve available rooms",
         data: { error: error.message },
       });
     }
